@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PartyFun - El juego de fiesta definitivo para adivinar palabras con amigos. Crea paquetes de palabras, forma equipos y compite en rondas de diversión y risas.">
+  <meta name="keywords" content="party game, juego de fiesta, adivinar palabras, charadas, juego en grupo, partyfun">
+  <meta name="google-adsense-account" content="ca-pub-8003242291729928">
+  <title>PartyFun - El Juego de Fiesta para Adivinar Palabras</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app-container" class="d-flex flex-column min-vh-100">
+    <header class="app-header text-center">
+      <h1 id="app-title" class="m-0" data-action="viewInicio" style="cursor: pointer;">PartyFun</h1>
+    </header>
+
+    <main id="main-content" class="flex-grow-1 d-flex align-items-center justify-content-center">
+      <div id="view-container" class="text-center">
+        <!-- Vistas se cargarán aquí -->
+      </div>
+    </main>
+
+    <footer class="app-footer text-center py-3 mt-4">
+      <div class="container">
+        <small class="d-block mb-2">© 2025 Pedrulo Creations</small>
+        <nav class="footer-nav">
+          <a href="#" data-action="viewAcercaDe">Sobre Nosotros</a> |
+          <a href="#" data-action="viewTerminos">Términos de Servicio</a> |
+          <a href="#" data-action="viewPrivacidad">Política de Privacidad</a> |
+          <a href="#" data-action="viewContacto">Contacto</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <div class="adsense-banner-bottom" style="display: none;">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8003242291729928"
+     crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8003242291729928"
+         data-ad-slot="3542642227"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- TEMPLATES PARA VISTAS -->
+  <template id="template-inicio">
+    <div class="view">
+        <h2 class="h4">¡El juego de fiesta definitivo!</h2>
+        <p class="text-muted">Crea paquetes de palabras con tus amigos y compite por equipos para adivinar el máximo de palabras antes de que se acabe el tiempo. ¡Risas garantizadas!</p>
+        <div class="d-grid gap-3 col-lg-10 col-md-12 mx-auto">
+            <!-- INICIO: Clases de botones modificadas -->
+            <button class="btn btn-home-create btn-lg" data-action="viewCrearPaquete"><i class="bi bi-plus-circle-fill"></i> Crear Paquete Nuevo</button>
+            <button class="btn btn-home-join btn-lg" data-action="viewUnirsePaquete"><i class="bi bi-people-fill"></i> Unirse a Paquete</button>
+            <button class="btn btn-home-play btn-lg" data-action="viewConfigurarPartida"><i class="bi bi-play-circle-fill"></i> Iniciar Nueva Partida</button>
+            <button class="btn btn-home-list btn-lg mt-2" data-action="viewListarMisPaquetes"><i class="bi bi-collection-fill"></i> Mis Paquetes</button>
+            <!-- FIN: Clases de botones modificadas -->
+        </div>
+    </div>
+  </template>
+
+  <template id="template-acerca-de">
+    <div class="view animate__animated animate__fadeIn">
+        <h2 class="view-title mb-4">Sobre PartyFun</h2>
+        <div class="text-start">
+            <p><strong>PartyFun</strong> es una aplicación web interactiva diseñada para animar cualquier reunión social o fiesta. La premisa es simple: los jugadores crean listas de palabras o frases divertidas y luego se dividen en equipos para competir en un juego de adivinanzas de alta energía.</p>
+            <p>El objetivo es que un miembro del equipo describa la palabra que aparece en la pantalla para que sus compañeros la adivinen, ¡todo ello mientras lucha contra el reloj! Es un juego que pone a prueba la creatividad, la rapidez mental y, sobre todo, la capacidad de divertirse en grupo.</p>
+            <h5 class="mt-4">¿Cómo funciona?</h5>
+            <ol>
+                <li><strong>Crea o Únete a un Paquete:</strong> Un "paquete" es simplemente una lista de palabras. Puedes crear uno nuevo e invitar a tus amigos a colaborar añadiendo sus propias palabras, o unirte a uno existente con un código.</li>
+                <li><strong>Configura la Partida:</strong> Reúne a tus amigos, define el número de equipos, el tiempo por ronda y el número de palabras con las que jugar.</li>
+                <li><strong>¡A Jugar!:</strong> Por turnos, un jugador de cada equipo intentará que sus compañeros adivinen tantas palabras como sea posible.<br>
+                    En la primera ronda deberás intentar que adivinen la palabra usando el número de palabras que quieras.<br>
+                    En la segunda ronda será igual que la primera, pero solo podrás utilizar una palabra para que tu equipo adivine la palabra.<br>
+                    ¡Y en la tercera y última ronda deberás hacer que la adivinen mediante mímica!</li>
+                <li><strong>Gana el Mejor:</strong> El equipo con más puntos al final de todas las rondas es el ganador.</li>
+            </ol>
+            <p class="mt-4">Nuestra misión es ofrecer una herramienta sencilla y divertida para crear momentos memorables con amigos y familiares. ¡Gracias por jugar!</p>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-secondary" data-action="viewInicio">Volver al Inicio</button>
+        </div>
+    </div>
+</template>
+
+<template id="template-terminos">
+    <div class="view animate__animated animate__fadeIn">
+        <h2 class="view-title mb-4">Términos y Condiciones de Uso</h2>
+        <div class="text-start">
+            <p>Fecha de última actualización: 30 de septiembre de 2025</p>
+    
+            <h5>1. Aceptación de los Términos</h5>
+            <p>Al acceder y utilizar PartyFun (el "Servicio"), aceptas cumplir con estos Términos y Condiciones. Si no estás de acuerdo, no utilices el Servicio.</p>
+    
+            <h5>2. Descripción del Servicio</h5>
+            <p>PartyFun es una aplicación web que permite a los usuarios crear paquetes de palabras o frases para jugar con amigos. Los usuarios pueden crear paquetes, añadir contenido y compartirlos con otros.</p>
+    
+            <h5>3. Responsabilidad del Usuario</h5>
+            <p>Eres el único responsable del contenido que creas y compartes en PartyFun. No debes crear ni compartir contenido que sea:</p>
+            <ul>
+                <li>Ilegal, ofensivo, difamatorio o que infrinja los derechos de terceros.</li>
+                <li>Protegido por derechos de autor sin el permiso del propietario.</li>
+                <li>Considerado spam o publicidad no solicitada.</li>
+            </ul>
+            <p>Nos reservamos el derecho de eliminar cualquier contenido o paquete que viole estos términos sin previo aviso.</p>
+    
+            <h5>4. Disponibilidad del Servicio</h5>
+            <p>Hacemos todo lo posible por mantener el Servicio operativo. Sin embargo, no garantizamos que el Servicio esté libre de errores o interrupciones. El Servicio se proporciona "tal cual", sin garantías de ningún tipo.</p>
+    
+            <h5>5. Limitación de Responsabilidad</h5>
+            <p>En la medida máxima permitida por la ley, PartyFun no será responsable de ningún daño directo, indirecto, incidental o consecuente que resulte del uso o la imposibilidad de uso del Servicio.</p>
+    
+            <h5>6. Modificaciones de los Términos</h5>
+            <p>Podemos modificar estos Términos y Condiciones en cualquier momento. Se te notificará de los cambios importantes y el uso continuado del Servicio después de dichos cambios constituirá tu aceptación de los nuevos términos.</p>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-secondary" data-action="viewInicio">Volver al Inicio</button>
+        </div>
+    </div>
+</template>
+
+<template id="template-privacidad">
+    <div class="view animate__animated animate__fadeIn">
+        <h2 class="view-title mb-4">Política de Privacidad</h2>
+        <div class="text-start">
+            <p>Fecha de última actualización: 30 de septiembre de 2025</p>
+    
+            <h5>1. Información que recopilamos</h5>
+            <p>Recopilamos información para proporcionar y mejorar nuestros servicios. Esto incluye:</p>
+            <ul>
+                <li><strong>Contenido generado por el usuario:</strong> Como los nombres de los paquetes de juegos y las palabras o frases que los usuarios añaden.</li>
+                <li><strong>Identificadores de sesión:</strong> Utilizamos identificadores anónimos para gestionar las sesiones de juego y la colaboración en tiempo real. No recopilamos información personal identificable como nombres o correos electrónicos.</li>
+                <li><strong>Datos de uso:</strong> Información sobre cómo interactúas con nuestro servicio, como las funciones que utilizas y la frecuencia de uso.</li>
+            </ul>
+    
+            <h5>2. Cómo usamos la información</h5>
+            <p>La información que recopilamos se utiliza para:</p>
+            <ul>
+                <li>Operar y mantener el servicio PartyFun.</li>
+                <li>Permitir la colaboración en tiempo real entre jugadores.</li>
+                <li>Mejorar la experiencia del usuario y desarrollar nuevas funciones.</li>
+                <li>Monitorizar el uso del servicio para prevenir abusos y garantizar la estabilidad.</li>
+            </ul>
+    
+            <h5>3. Publicidad de Terceros (Google AdSense)</h5>
+            <p>Utilizamos Google AdSense para mostrar anuncios en nuestro sitio. Google puede utilizar cookies para mostrar anuncios relevantes basados en las visitas anteriores de un usuario a este y otros sitios web.</p>
+            <p>El uso de cookies de publicidad de Google permite a Google y a sus socios mostrar anuncios basados en su visita a nuestros sitios y/o a otros sitios de Internet. Los usuarios pueden inhabilitar la publicidad personalizada visitando la <a href="https://www.google.com/settings/ads">Configuración de anuncios de Google</a>.</p>
+    
+            <h5>4. Seguridad</h5>
+            <p>Nos comprometemos a proteger tu información. Tomamos medidas razonables para proteger la información que recopilamos contra pérdida, robo, uso indebido y acceso no autorizado.</p>
+    
+            <h5>5. Cambios en esta política</h5>
+            <p>Podemos actualizar nuestra Política de Privacidad de vez en cuando. Te notificaremos cualquier cambio publicando la nueva política en esta página.</p>
+    
+            <h5>6. Contacto</h5>
+            <p>Si tienes alguna pregunta sobre esta Política de Privacidad, por favor contáctanos a través de nuestra página de contacto.</p>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-secondary" data-action="viewInicio">Volver al Inicio</button>
+        </div>
+    </div>
+</template>
+
+<template id="template-contacto">
+    <div class="view animate__animated animate__fadeIn">
+        <h2 class="view-title mb-4">Contacto</h2>
+        <div class="text-start">
+            <p>Si tienes alguna pregunta, sugerencia o problema con el sitio, no dudes en contactarnos.</p>
+            <p>Puedes enviar un correo electrónico a: <a href="mailto:soporte@partyfun.ddns.net">soporte@partyfun.ddns.net</a> (este es un ejemplo, deberás crear esta cuenta de correo).</p>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-secondary" data-action="viewInicio">Volver al Inicio</button>
+        </div>
+    </div>
+</template>
+  
+  <template id="template-crear-paquete">
+    <div class="view animate__animated animate__fadeInRight">
+      <h2 class="view-title mb-4">Nuevo Paquete de Palabras</h2>
+      <form id="formCrearPaquete">
+        <div class="mb-4">
+          <label for="nombrePaqueteNuevo" class="form-label">Nombre del Paquete</label>
+          <input type="text" class="form-control form-control-lg" id="nombrePaqueteNuevo" required placeholder="Ej: Personajes Famosos">
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Crear y Añadir Palabras</button>
+            <button type="button" class="btn btn-light" data-action="viewInicio">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </template>
+  
+  <template id="template-gestionar-paquete">
+    <div class="view animate__animated animate__fadeInUp">
+        <h2 class="view-title mb-1" id="tituloGestionPaquete">Gestionar: </h2>
+        <p class="text-muted mb-1 text-center">Código para compartir: 
+            <strong id="codigoPaqueteDisplay" class="text-primary selectable mx-1" title="Haz clic para copiar"></strong>
+            <button class="btn btn-sm btn-outline-secondary py-0 px-1 align-baseline" id="copyCodeButton" title="Copiar código">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-clipboard icon-sm" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>
+            </button>
+            <button class="btn btn-sm btn-info py-0 px-1 align-baseline ms-2" id="shareLinkButton" title="Compartir enlace">
+                <i class="bi bi-share-fill"></i>
+            </button>
+        </p>
+        <div class="form-check form-switch mb-3 d-flex justify-content-center align-items-center py-2">
+            <input class="form-check-input me-2" type="checkbox" role="switch" id="switchPaqueteAbierto" style="font-size: 1.2em;">
+            <label class="form-check-label" for="switchPaqueteAbierto" style="font-size: 0.9em;">Abierto a nuevas palabras</label>
+        </div>
+        <form id="formAnadirPalabra" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" id="palabraNueva" placeholder="Escribe una palabra y pulsa Enter o Añadir" required>
+                <button class="btn btn-secondary" type="submit">Añadir</button>
+            </div>
+        </form>
+        <div class="list-words-container" style="max-height: 250px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 5px; background-color: #fff;">
+            <ul id="listaPalabrasPaquete" class="list-group list-group-flush">
+                <!-- Palabras se listarán aquí -->
+            </ul>
+        </div>
+        <div class="d-grid mt-3">
+            <button class="btn btn-light" data-action="viewInicio">Finalizar Gestión</button>
+            <button id="btnEliminarPaqueteDesdeGestion" class="btn btn-danger mt-2" style="display: none;">Eliminar Paquete</button>
+        </div>
+    </div>
+  </template>
+
+  <template id="template-unirse-paquete">
+     <div class="view animate__animated animate__fadeInLeft">
+        <h2 class="view-title mb-4">Unirse a un Paquete</h2>
+        <form id="formUnirsePaquete">
+            <div class="mb-3">
+                <label for="codigoPaqueteUnir" class="form-label">Código del Paquete a Unirse:</label>
+                <input type="text" class="form-control form-control-lg" id="codigoPaqueteUnir" required placeholder="Pega el código aquí">
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-info btn-lg">Unirme y Añadir Palabras</button>
+                <button type="button" class="btn btn-light" data-action="viewInicio">Cancelar</button>
+            </div>
+        </form>
+    </div>
+  </template>
+
+  <template id="template-listar-mis-paquetes">
+    <div class="view animate__animated animate__fadeIn">
+        <h2 class="view-title mb-4">Mis Paquetes</h2>
+        <div id="listaMisPaquetes" class="list-group mb-3">
+            <!-- Lista de paquetes locales/del usuario -->
+        </div>
+        <div class="text-center">
+            <button class="btn btn-secondary" data-action="viewInicio">Volver al Inicio</button>
+        </div>
+    </div>
+  </template>
+
+  <template id="template-configurar-partida">
+    <div class="view animate__animated animate__fadeIn">
+        <h2 class="view-title mb-4">¡A Configurar la Partida!</h2>
+        <form id="formConfigurarPartida">
+            <div class="card-like-section mb-3">
+                <h4 class="section-title">Paso 1: Jugadores</h4>
+                 <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputNombreJugador" placeholder="Nombre del nuevo jugador">
+                    <button class="btn btn-outline-secondary" type="button" id="btnAnadirJugadorConfig">Añadir</button>
+                </div>
+                <div id="listaJugadoresConfig" class="list-group list-group-flush" style="max-height: 150px; overflow-y: auto; background-color: #fff;">
+                    <!-- Jugadores añadidos se mostrarán aquí -->
+                </div>
+            </div>
+
+            <div class="card-like-section mb-3">
+                <h4 class="section-title">Paso 2: Ajustes</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="numEquipos" class="form-label">Número de Equipos</label>
+                        <input type="number" class="form-control" id="numEquipos" value="2" min="2" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tiempoRonda" class="form-label">Tiempo/Ronda (seg)</label>
+                        <input type="number" class="form-control" id="tiempoRonda" value="45" min="10" step="5" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-like-section mb-3">
+                <h4 class="section-title">Paso 3: Palabras</h4>
+                 <div class="mb-3">
+                    <label for="maxPalabras" class="form-label">Máximo de Palabras Totales</label>
+                    <input type="number" class="form-control" id="maxPalabras" value="50" min="10" step="5" required>
+                    <div class="form-text">Se tomarán hasta este número de palabras aleatoriamente de los paquetes seleccionados.</div>
+                </div>
+                <label class="form-label d-block mb-2">Seleccionar Paquetes:</label>
+                <div id="listaPaquetesSeleccion" class="p-2 rounded mb-2" style="max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color);">
+                    <!-- Checkboxes de paquetes -->
+                </div>
+                 <p class="info-field text-end mt-1 mb-0">Palabras disponibles de paquetes seleccionados: <strong id="totalPalabrasDisponiblesConfig" class="text-primary">0</strong></p>
+            </div>
+
+            <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-success btn-lg">¡Empezar a Jugar!</button>
+                <button type="button" class="btn btn-light" data-action="viewInicio">Volver</button>
+            </div>
+        </form>
+    </div>
+  </template>
+
+  <template id="template-vista-equipos">
+    <div class="view animate__animated animate__fadeIn vista-equipos">
+        <h2 class="view-title mb-3">Equipos - Ronda <span id="rondaActualDisplay">1</span>/<span id="rondaMaximaDisplay">3</span></h2>
+        
+        <div id="controlesEdicionEquipos" class="mb-3 text-center" style="display: none;">
+             <p class="text-muted small">Puedes arrastrar jugadores entre equipos o reorganizarlos aleatoriamente.</p>
+            <button id="btnReorganizarEquiposJuego" class="btn btn-warning btn-sm">Reorganizar Aleatoriamente</button> 
+        </div>
+
+        <div id="contenedorEquiposDisplay" class="row row-cols-1 row-cols-md-2 g-3 mb-4">
+            <!-- Equipos se renderizan aquí -->
+        </div>
+        <div class="d-grid gap-2 col-md-8 mx-auto">
+            <button id="btnIniciarTurnoJuego" class="btn btn-success btn-lg">Siguiente Turno</button>
+            <button id="btnTerminarPartidaVolverConfig" class="btn btn-outline-light mt-2" data-action="viewConfigurarPartida">Terminar Partida y Volver a Config.</button>
+        </div>
+    </div>
+  </template>
+
+  <template id="template-pre-turno">
+    <div class="view animate__animated animate__fadeIn text-center">
+        <h2 class="view-title">Ronda <span id="preTurnoRonda"></span></h2>
+        <h3 class="mt-3">Turno de: <strong id="preTurnoNombreJugador"></strong></h3>
+        <p class="text-muted mb-4">(<span id="preTurnoEquipoNombre"></span>)</p>
+        <p class="info-field">Palabras disponibles esta ronda: <strong id="preTurnoPalabrasDisponibles"></strong></p>
+        <p class="lead my-4">¡Prepárate!</p>
+        <button id="btnEmpezarTurnoGameplay" class="btn btn-success btn-lg animate__animated animate__pulse animate__infinite animate__slower">Empezar Ahora</button>
+    </div>
+  </template>
+
+  <template id="template-turno-juego">
+    <div class="view text-center d-flex flex-column align-items-center justify-content-center" style="min-height: calc(100vh - var(--header-height, 70px) - var(--footer-height, 50px) - 30px);">
+        <h3 class="mb-1 text-white-50" id="turnoNombreJugadorDisplay"></h3>
+        <h4 class="mb-2 text-white-50" id="turnoInfoEquipoRondaDisplay"></h4>
+        <div id="turnoCountdown" class="countdown animate__animated">0</div>
+        <div id="turnoPalabraWrapper" class="my-3 w-100 px-2 animate__animated" style="max-width: 500px;"> 
+        </div>
+        <p id="turnoInfoPalabrasRestantes" class="mb-0 info-field"></p>
+    </div>
+  </template>
+  
+  <template id="template-revision-turno">
+    <div class="view animate__animated animate__fadeInUp">
+        <h2 class="view-title mb-3">Revisión del Turno</h2>
+        <h4 class="text-primary mb-3 text-center">Jugador: <span id="revisionNombreJugador"></span></h4>
+        <div id="listaRevisionPalabras" class="list-group mb-3" style="max-height: 300px; overflow-y:auto;">
+        </div>
+        <div class="d-grid">
+            <button id="btnConfirmarRevision" class="btn btn-primary btn-lg">Confirmar y Continuar</button>
+        </div>
+    </div>
+  </template>
+
+  <template id="template-resultados-finales">
+    <div class="view animate__animated animate__jackInTheBox">
+        <h1 class="view-title text-center my-4">¡Resultados!</h1>
+        <div class="table-responsive-sm">
+            <table id="tablaResultados" class="table table-striped table-hover table-bordered text-center shadow-sm tabla-resultados">
+                <thead><tr></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="text-center d-grid col-md-6 mx-auto">
+            <button class="btn btn-primary btn-lg mt-4" data-action="viewInicio">Jugar de Nuevo</button>
+        </div>
+    </div>
+  </template>
+  <!-- FIN TEMPLATES -->
+
+  <link rel="stylesheet" href="https://esm.sh/sileo/styles.css">
+  <script type="module">
+    import React from 'https://esm.sh/react@18.3.1';
+    import ReactDOM from 'https://esm.sh/react-dom@18.3.1/client';
+    import { Toaster, sileo } from 'https://esm.sh/sileo?deps=react@18.3.1,react-dom@18.3.1';
+
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    
+    const root = ReactDOM.createRoot(container);
+    root.render(React.createElement(Toaster, { 
+      position: 'bottom-right',
+      options: {
+        duration: 4000,
+        roundness: 16,
+        styles: {
+          title: 'font-weight: 600; font-family: sans-serif;',
+          description: 'opacity: 0.8;'
+        }
+      }
+    }));
+
+    window.sileo = sileo;
+  </script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>
